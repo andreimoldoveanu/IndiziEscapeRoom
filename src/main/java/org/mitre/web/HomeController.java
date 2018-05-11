@@ -17,20 +17,8 @@
  *******************************************************************************/
 package org.mitre.web;
 
-import java.security.Principal;
-import java.util.Locale;
-import java.util.Set;
-
-import javax.annotation.Resource;
-
-import org.mitre.openid.connect.client.OIDCAuthenticationFilter;
-import org.mitre.openid.connect.client.SubjectIssuerGrantedAuthority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,32 +33,29 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(Locale locale, Model model, Principal p) {
-//		return "home";
+	private static String message = "Leggere qui per indizi";
+	
+//	@Configuration
+//	public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
+//	  @Override
+//	  protected void configure(HttpSecurity http) throws Exception {
+//	    http.csrf().disable();
+//	  }
 //	}
-//
-//	@RequestMapping("/open")
-//	public String open(Principal p) {
-//		return "open";
-//	}
-//
-//	@RequestMapping("/admin")
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	public String admin(Model model, Principal p) {
-//
-//
-//		return "admin";
-//	}
+	
 
-	@RequestMapping(value="/text", method= RequestMethod.GET)
-	public String text(
-			@RequestParam(value="text") String text) {
+	@RequestMapping(value="/writeText", method= RequestMethod.POST)
+	public String writeText(
+			@RequestParam(value="text") String text
+			) {
+		message = text;
+		return message;
+	}
+	
+	@RequestMapping(value="/getText", method= RequestMethod.GET)
+	public String text() {
 		
-		return "text returned";
+		return message;
 	}
 
 }
