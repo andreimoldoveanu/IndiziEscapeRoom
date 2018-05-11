@@ -14,7 +14,7 @@ app.service('salaPcService',function(){
 		$http({
 			method: 'POST',
 			url: '',
-			params: {
+			data: {
 				text: text
 			}
 		}).then(function(response){
