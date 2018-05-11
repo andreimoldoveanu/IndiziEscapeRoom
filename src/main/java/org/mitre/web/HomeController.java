@@ -39,12 +39,12 @@ public class HomeController {
 	private static String message = "Leggere qui per indizi";
 	
 
-	@RequestMapping(value="/writeText", method= RequestMethod.POST)
-	public @ResponseBody void writeText(
+	@RequestMapping(value="/writeText", method= RequestMethod.POST,produces="application/json")
+	public @ResponseBody String writeText(
 			@RequestBody String text
 			) {
 		message = text;
-//		return message;
+		return message;
 	}
 	
 	@RequestMapping(value="/getText", method= RequestMethod.GET)
