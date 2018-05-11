@@ -3,15 +3,15 @@ var app = angular.module("myApp",['ngRoute']);
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 	when('/home', {
-		templateUrl: 'topics/home.jsp',
+		templateUrl: 'topics/home.html',
 		controller: 'homeController'
 	}).
 	when('/escape/salaPc',{
-		templateUrl: 'topics/salaPc.jsp',
+		templateUrl: 'topics/salaPc.html',
 		controller: 'salaPcController'
 	}).
 	when('/escape/salaEscape',{
-		templateUrl: 'topics/salaEscape.jsp',
+		templateUrl: 'topics/salaEscape.html',
 		controller: 'salaEscapeController'
 	}).
 	otherwise({

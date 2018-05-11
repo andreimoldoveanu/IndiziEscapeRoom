@@ -43,13 +43,13 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
-	<servlet-mapping>
+	<!-- <servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 	<welcome-file-list>
-    	<welcome-file>topics/index.jsp</welcome-file>
+    	<welcome-file>topics/index.html</welcome-file>
   	</welcome-file-list>
 
 </web-app>
