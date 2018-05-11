@@ -6,10 +6,14 @@ app.config(['$routeProvider', function($routeProvider) {
 		templateUrl: 'topics/home.jsp',
 		controller: 'homeController'
 	}).
-	when('/escape/text',{
-		templateUrl: 'topics/text.jsp',
-		controller: 'textController'
-	});
+	when('/escape/salaPc',{
+		templateUrl: 'topics/salaPc.jsp',
+		controller: 'salaPcController'
+	}).
+	when('/escape/salaEscape',{
+		templateUrl: 'topics/salaEscape.jsp',
+		controller: 'salaEscapeController'
+	}).
 	otherwise({
 		redirectTo: '/home'
 	});
