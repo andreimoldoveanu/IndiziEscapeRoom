@@ -20,6 +20,7 @@ package org.mitre.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,15 +39,15 @@ public class HomeController {
 	private static String message = "Leggere qui per indizi";
 	
 
-	@RequestMapping(value="/writeText", method= RequestMethod.POST, produces = "application/text")
-	public @ResponseBody String writeText(
-			@RequestParam(value="text") String text
+	@RequestMapping(value="/writeText", method= RequestMethod.POST)
+	public @ResponseBody void writeText(
+			@RequestBody String text
 			) {
 		message = text;
-		return message;
+//		return message;
 	}
 	
-	@RequestMapping(value="/getText", method= RequestMethod.GET, produces = "application/text")
+	@RequestMapping(value="/getText", method= RequestMethod.GET)
 	public @ResponseBody String text() {
 		
 		return message;
