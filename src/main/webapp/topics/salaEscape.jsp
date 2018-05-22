@@ -17,19 +17,29 @@
 				font-size: 16px;
 				cursor: pointer;
 			}
-
-			div {
+			
+			.scritta{
 				font-family: Potter;
     			font-size: 45px;
-    			
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 80px;
+    			position: fixed;
+			    margin-top: 100px;
+			    margin-bottom: 100px;
+			    margin-right: 150px;
+			    margin-left: 80px;
 			}
-			body {
-			    background: url("/resources/images/Papiro.jpg");
-   				background-position: center center;  
+			
+			.papiro{
+				height: 768px;
+				width: 1366px;
+				background: url("/resources/images/Papiro.jpg");
+   				background-position: center center;
+   				}
+   				
+			.silente{
+				height: 768px;
+				width: 1366px;
+				background: url("/resources/images/Silente.jpeg");
+   				background-position: center center;
 			}
 		</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,7 +47,16 @@
 <body>
 	<div ng-app="myApp">
 		<div ng-controller="salaEscapeController">
-			<label  ng-bind="risultato"></label>
+		
+			<div class="papiro" ng-hide="silente">
+				<label class="scritta" ng-bind="risultato"></label>
+			</div>
+			
+			<div class="silente" ng-show="silente">
+				
+				
+			</div>
+			
 		</div>
 	</div>
 	
@@ -46,6 +65,24 @@
 	var app = angular.module("myApp",[]);
 	
 	app.controller('salaEscapeController',function($scope,salaEscapeService,$interval){
+		
+		$scope.silente = false;
+		
+		$interval( function(){
+			salaEscapeService.getSilente().then(function(response){
+				if(response.data){
+					$scope.risultato = "";
+					$scope.silente = true;
+					//ng-show
+					//aggiungere immagine di silente in background
+				}else if(!response.data){
+					$scope.silente = false;
+				}
+			},function(response){
+				$scope.silente = true;
+				console.log("errore: " + response.data);
+			})
+		},4000);
 
 		$interval( function(){
 			salaEscapeService.getText().then(function(response){
@@ -53,8 +90,7 @@
 			},function(response){
 				$scope.risultato = response.data.text;
 			});
-		},5000);
-		
+		},4000);
 		
 	});
 
@@ -63,6 +99,13 @@
 			return $http({
 				method: 'GET',
 				url: '/escape/getText'
+			});
+		}
+		
+		this.getSilente = function(){
+			return $http({
+				method: 'GET',
+				url: '/escape/getSilente'
 			});
 		}
 	});
