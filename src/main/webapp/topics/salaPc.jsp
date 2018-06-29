@@ -130,7 +130,7 @@
 		this.resetGames = function(){
 			return $http({
 				method: 'POST',
-				url: '/escape/resetGames'
+				url: '/escape/setResetGames'
 			});
 		}
 		

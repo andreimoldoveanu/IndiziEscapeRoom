@@ -44,6 +44,7 @@ public class HomeController {
 
 	private String message = "{\"text\":\"Leggere qui per indizi\"}";
 	private String silente = "false";
+	private Integer resetAll = 0;
 
 	@RequestMapping(value="/writeText", method= RequestMethod.POST,produces="application/json")
 	public @ResponseBody String writeText(
@@ -61,8 +62,9 @@ public class HomeController {
 		return this.silente;
 	}
 	
-	@RequestMapping(value="/resetGames", method= RequestMethod.POST,produces="application/json")
-	public @ResponseBody String resetGames() {
+	@RequestMapping(value="/setResetGames", method= RequestMethod.POST,produces="application/json")
+	public @ResponseBody String setResetGames() {
+		resetAll=1;
 		//IMPLEMENT CODE TO CONNECT ARDUINO
 		String timeStamp = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy").format(Calendar.getInstance().getTime());
 		return "{\"text\":\"resetted at " + timeStamp + " \"}";
@@ -70,7 +72,19 @@ public class HomeController {
 	
 	@RequestMapping(value="/getText", method= RequestMethod.GET)
 	public @ResponseBody String text() {
+		System.out.println("got text");
 		return message;
+	}
+
+
+	@RequestMapping(value="/getGameReset", method= RequestMethod.GET)
+	public @ResponseBody boolean getColorGameReset() {
+		System.out.println("GET RESET" + resetAll);
+		if(resetAll==1) {
+			resetAll=0;
+			return true;
+		}
+		return false;
 	}
 	
 	@RequestMapping(value="/getSilente", method= RequestMethod.GET)
